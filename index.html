@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Draw a Tarot Card</title>
+</head>
+<body>
+  <button onclick="pullCard()">Draw a Card</button>
+
+  <script>
+    async function pullCard() {
+      try {
+        const response = await fetch(`https://tarotapi.dev/api/v1/cards/random?n=1`);
+        if (!response.ok) throw new Error('Network error');
+
+        const data = await response.json();
+        const card = data.cards[0];
+
+        localStorage.setItem("tarotCard", JSON.stringify({
+          name: card.name,
+          desc: card.meaning_up,
+          image: card.image
+        }));
+
+        window.location.href = "card.html";
+      } catch (err) {
+        console.error("Fetch error:", err);
+      }
+    }
+  </script>
+</body>
+</html>

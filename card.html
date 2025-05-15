@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Tarot Card</title>
+</head>
+<body>
+    <h1 id="card-name"></h1>
+    <img id="card-image" src="" alt="Tarot card image" style="width:300px;">
+    <p id="card-desc"></p>
+
+    <script>
+        const card = JSON.parse(localStorage.getItem("tarotCard"));
+
+        if (card) {
+            document.getElementById("card-name").textContent = card.name;
+            document.getElementById("card-desc").textContent = card.desc;
+            document.getElementById("card-image").src = card.image;
+        } else {
+            document.body.textContent = "No card found. Please draw a card first.";
+        }
+    </script>
+</body>
+</html>
